@@ -1,0 +1,49 @@
+//
+//  Basic.pch
+//  HDTicket
+//
+//  Created by 周志荣 on 16/12/9.
+//  Copyright © 2016年 周志荣. All rights reserved.
+//
+
+#ifndef Basic_pch
+#define Basic_pch
+
+#import "HDAppDelegate.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* Basic_pch */
+
+#define HD_APP_DELEGATE (HDAppDelegate *)[UIApplication sharedApplication].delegate
+
+//聚合数据的APPKEY
+#define APPKEY @"7e564763c17f05d3a4fa5bdc69fc106b"
+
+#if DEBUG
+#define NSLog(FORMAT, ...) fprintf(stderr,"\nfunction:%s line:%d content:%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#endif
+
+#define STATIONS @"http://apis.juhe.cn/train/station.list.php?key=7e564763c17f05d3a4fa5bdc69fc106b"
+
+#define CHECK(s1,s2,s3) [[NSString stringWithFormat:@"http://apis.juhe.cn/train/s2swithprice?start=%@&end=%@&key=%@",s1,s2,s3] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet]
+
+#define IMAGE(name) [UIImage imageNamed:name]
+
+#define WIDTH [UIScreen mainScreen].bounds.size.width
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
+
+#define RGB(a,b,c) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:1]
+//#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
+//#define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)
+
+
+
+
+
+
+
+
+
+
