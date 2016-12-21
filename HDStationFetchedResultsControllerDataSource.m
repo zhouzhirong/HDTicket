@@ -126,30 +126,11 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *placeString = cell.textLabel.text;
     
-//    [self.viewController.navigationController popToRootViewControllerAnimated:YES];
-//    
-//    HDAppDelegate *delegate = HD_APP_DELEGATE;
-//    TicketViewController *ticketVC = (TicketViewController *)[delegate topViewController];
-////    用代理协议
-//    NSDictionary *dict = @{
-//                           @"detail":placeString,
-//                           @"index":@(self.viewController.stationType)
-//                           };
-//    self.delegate = ticketVC;
-//    if ([self.delegate respondsToSelector:@selector(updateTableViewWithSource:)]) {
-//        [self.delegate updateTableViewWithSource:dict];
-//    }
-    // 这里用block处理回调
-//    TicketViewController *ticketVC = [[TicketViewController alloc] init];
-//    if (ticketVC.block) {
-//        ticketVC.block(placeString,self.viewController.stationType);
-//    }
     if (self.viewController.searchSuccessBlock) {
         self.viewController.searchSuccessBlock(placeString,self.viewController.stationType);
     }
     self.viewController.searchController.active = NO;
-    [self.viewController.searchController removeFromParentViewController];
-    [self.viewController.navigationController popViewControllerAnimated:NO];
+    [self.viewController.navigationController popViewControllerAnimated:YES];
 }
 
 
