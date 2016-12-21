@@ -177,11 +177,10 @@
         searchController.dimsBackgroundDuringPresentation = YES;
     }else{
         [self searchTableView];
-        searchText = [searchText uppercaseString];
         NSArray *fullDatas = [self stationList];
         for (Station *station in fullDatas)
         {
-            if ([station.name containsString:searchText] || [station.combineLetter containsString:searchText])
+            if ([station.name containsString:searchText] || [station.combineLetter containsString:[searchText uppercaseString]])
             {
                 [_searchList addObject:station];
             }
@@ -226,6 +225,22 @@
         [((UISearchController *)[self.viewController valueForKey:@"searchController"]).searchBar resignFirstResponder];
     }
 }
+//这个是增加的方法
+-(NSString *)pinyin:(NSString *)chinese
+{
+    NSParameterAssert(chinese);
+    //将NSString装换成NSMutableString
+    NSMutableString *pinyin = [chinese mutableCopy];
+    
+    //将汉字转换为拼音(带音标)
+    CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformMandarinLatin, NO);
+    
+    //去掉拼音的音标
+    CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformStripCombiningMarks, NO);
+    return [[pinyin stringByReplacingOccurrencesOfString:@" " withString:@""]uppercaseString];
+}
+
+
 
 
 @end
