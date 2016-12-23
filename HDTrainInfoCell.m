@@ -8,6 +8,11 @@
 
 #import "HDTrainInfoCell.h"
 
+typedef NS_ENUM(NSInteger,TRAINTYPE) {
+    D_TYPE,
+    G_TYPE,
+    OTHER_TYPE
+};
 @interface HDTrainInfoCell()
 
 
@@ -28,28 +33,40 @@
 @implementation HDTrainInfoCell
 
 /*
- 
- @property(nonatomic,copy)NSString *start_station_name;  //出发站
- @property(nonatomic,copy)NSString *end_station_name;    //到达站
+ @property(nonatomic,copy)NSString *start_station_name;  //出发站类型
+ @property(nonatomic,copy)NSString *end_station_name;    //到达站类型
  @property(nonatomic,copy)NSString *start_time;          //出发时间
  @property(nonatomic,copy)NSString *arrive_time;         //到达时间
  @property(nonatomic,copy)NSString *lishi;               //运行时间
  @property(nonatomic,copy)NSString *train_no;            //列车号
- 
  @property(nonatomic,copy)NSString *to_station_name;     //对比end_station_name看是经过还是终点站
  @property(nonatomic,copy)NSString *from_station_name;   //对比start_station_name看是经过还是始发站
- @property(nonatomic,copy)NSString *zy_num;              //一等座剩余
- @property(nonatomic,copy)NSString *wz_num;              //无座剩余
- @property(nonatomic,copy)NSString *ze_num;              //二等座剩余
- 
- */
+ @property(nonatomic,copy)NSString *zy_num;          //一等座剩余
+ @property(nonatomic,copy)NSString *ze_num;          //二等座剩余
+ @property(nonatomic,copy)NSString *wz_num;          //无座剩余
+ @property(nonatomic,copy)NSString *swz_num;          //商务座剩余
+ @property(nonatomic,copy)NSString *yz_num;           //硬座
+ @property(nonatomic,copy)NSString *yw_num;           //硬卧剩余
+ @property(nonatomic,copy)NSString *rw_num;           //软卧
 
+ */
+//  高铁:商务座 一等座 二等座
+//  动车:一等座 二等座 无座
+//  其他的包括   硬座 硬卧 软卧 无座
 -(void)setTrainInfoModel:(HDTrainInfoModel *)trainInfoModel
 {
+    TRAINTYPE type;
+    
     _trainInfoModel = trainInfoModel;
     
     _train_no.text = trainInfoModel.train_no;
-   
+    if ([trainInfoModel.train_no hasPrefix:@"D"]) {
+        type = D_TYPE;
+    }else if ([trainInfoModel.train_no hasPrefix:@"G"]){
+        type = G_TYPE;
+    }else{
+        type = OTHER_TYPE;
+    }
     _startStationType = [trainInfoModel.from_station_name isEqualToString:trainInfoModel.start_station_name] ? @"" : @"过·";
     _arriveStationType = [trainInfoModel.to_station_name isEqualToString:trainInfoModel.end_station_name] ? @"" : @"过·";
     
@@ -59,29 +76,84 @@
     _departAndArrival.textColor = [UIColor lightGrayColor];
     _runtime.text = [NSString stringWithFormat:@"历时%@",trainInfoModel.lishi];
     _runtime.textColor = [UIColor lightGrayColor];
-    if ([trainInfoModel.ze_num isEqualToString:@"无"]) {
-        _ze_num.text = @"二等座 0";
-        _ze_num.textColor = RGB(175, 175, 175);
-    }
-    else{
-        _ze_num.text = [NSString stringWithFormat:@"二等座 %@",trainInfoModel.ze_num];
-        _ze_num.textColor = RGB(0, 145, 238);
-    }
     
-    if ([trainInfoModel.zy_num isEqualToString:@"无"]) {
-        _zy_num.text = @"二等座 0";
-        _zy_num.textColor = RGB(175, 175, 175);
-    }else{
-        _zy_num.text = [NSString stringWithFormat:@"一等座 %@",trainInfoModel.zy_num];
-        _zy_num.textColor = RGB(0, 145, 238);
-    }
-    
-    if ([trainInfoModel.wz_num isEqualToString:@"无"]) {
-        _wz_num.text = @"二等座 0";
-        _wz_num.textColor = RGB(175, 175, 175);
-    }else{
-        _wz_num.text = [NSString stringWithFormat:@"无座 %@",trainInfoModel.wz_num];
-        _wz_num.textColor = RGB(0, 145, 238);
+    switch (type) {
+        case D_TYPE:
+        case G_TYPE:
+            if ([trainInfoModel.ze_num isEqualToString:@"无"]) {
+                _ze_num.text = @"二等座 0";
+                _ze_num.textColor = RGB(175, 175, 175);
+            }
+            else{
+                _ze_num.text = [NSString stringWithFormat:@"二等座 %@",trainInfoModel.ze_num];
+                _ze_num.textColor = RGB(0, 145, 238);
+            }
+            
+            if ([trainInfoModel.zy_num isEqualToString:@"无"]) {
+                _zy_num.text = @"一等座 0";
+                _zy_num.textColor = RGB(175, 175, 175);
+            }else{
+                _zy_num.text = [NSString stringWithFormat:@"一等座 %@",trainInfoModel.zy_num];
+                _zy_num.textColor = RGB(0, 145, 238);
+            }
+            if (type==D_TYPE)
+            {
+                if ([trainInfoModel.wz_num isEqualToString:@"无"]) {
+                    _wz_num.text = @"无座 0";
+                    _wz_num.textColor = RGB(175, 175, 175);
+                }else{
+                    _wz_num.text = [NSString stringWithFormat:@"无座 %@",trainInfoModel.wz_num];
+                    _wz_num.textColor = RGB(0, 145, 238);
+                }
+            }
+            else
+            {
+                if ([trainInfoModel.swz_num isEqualToString:@"无"]) {
+                    _wz_num.text = @"商务座 0";
+                    _wz_num.textColor = RGB(175, 175, 175);
+                }else{
+                    _wz_num.text = [NSString stringWithFormat:@"商务座 %@",trainInfoModel.swz_num];
+                    _wz_num.textColor = RGB(0, 145, 238);
+                }
+            }
+            break;
+
+        default:
+            //非高铁动车类火车 按无座 硬座 硬卧 软卧排序
+            if ([trainInfoModel.wz_num isEqualToString:@"无"]) {
+                _ze_num.text = @"无座 0";
+                _ze_num.textColor = RGB(175, 175, 175);
+            }
+            else{
+                _ze_num.text = [NSString stringWithFormat:@"无座 %@",trainInfoModel.wz_num];
+                _ze_num.textColor = RGB(0, 145, 238);
+            }
+            
+            if ([trainInfoModel.yz_num isEqualToString:@"无"]) {
+                _zy_num.text = @"硬座 0";
+                _zy_num.textColor = RGB(175, 175, 175);
+            }else{
+                _zy_num.text = [NSString stringWithFormat:@"硬座 %@",trainInfoModel.yz_num];
+                _zy_num.textColor = RGB(0, 145, 238);
+            }
+            
+            if ([trainInfoModel.yw_num isEqualToString:@"无"]) {
+                _wz_num.text = @"硬卧 0";
+                _wz_num.textColor = RGB(175, 175, 175);
+            }else{
+                _wz_num.text = [NSString stringWithFormat:@"硬卧 %@",trainInfoModel.yw_num];
+                _wz_num.textColor = RGB(0, 145, 238);
+            }
+            
+            if ([trainInfoModel.rw_num isEqualToString:@"无"]) {
+                _yz_num.text = @"软卧 0";
+                _yz_num.textColor = RGB(175, 175, 175);
+            }else{
+                _yz_num.text = [NSString stringWithFormat:@"软卧 %@",trainInfoModel.rw_num];
+                _yz_num.textColor = RGB(0, 145, 238);
+            }
+            
+            break;
     }
 }
 

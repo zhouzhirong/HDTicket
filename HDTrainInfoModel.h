@@ -22,6 +22,7 @@
 @property(nonatomic,copy)NSString *ze_num;          //二等座剩余
 @property(nonatomic,copy)NSString *wz_num;          //无座剩余
 @property(nonatomic,copy)NSString *swz_num;          //商务座剩余
+
 @property(nonatomic,copy)NSString *yz_num;           //硬座
 @property(nonatomic,copy)NSString *yw_num;           //硬卧剩余
 @property(nonatomic,copy)NSString *rw_num;           //软卧

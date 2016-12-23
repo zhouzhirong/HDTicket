@@ -144,8 +144,12 @@
                     model.train_no = dict[@"train_no"];
                     model.zy_num = dict[@"zy_num"];
                     model.wz_num = dict[@"wz_num"];
+                    model.swz_num = dict[@"swz_num"];
                     model.ze_num = dict[@"ze_num"];
                     model.lishi = dict[@"lishi"];
+                    model.yz_num = dict[@"yz_num"];
+                    model.yw_num = dict[@"yw_num"];
+                    model.rw_num = dict[@"rw_num"];
                     model.arrive_time = dict[@"arrive_time"];
                     [ticketInfoVC.dataSource addObject:model];
                 }
