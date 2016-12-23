@@ -29,37 +29,6 @@
 }
 
 /**
- 获取车站信息并存储
- */
-
-//#pragma mark 获取站点数据并存储
-//-(void)stationList
-//{
-//    HDAppDelegate *delegate = HD_APP_DELEGATE;
-//    _netHandle = delegate.defaultNetHandle;
-//    [_netHandle activateWithURL:[NSURL URLWithString:STATIONS] headers:nil params:nil method:Get success:^(NSURLSessionDataTask *task, NSDictionary *dic) {
-//       // 运用coreData存储站点数据
-//        NSArray *array = dic[@"result"];
-//        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:delegate.localManager.backgroundObjectContext];
-//            station.name = ((NSDictionary *)obj)[@"sta_name"];
-//            station.firstLetter = [station firstLetterOfName:station.name];
-//            station.combineLetter = [station combineLetterOfName:station.name];
-//        }];
-//        BOOL isSuccess = [delegate.localManager.managedObjectContext save:nil];
-//        NSLog(@"isSuccess--%d",isSuccess);
-////        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-////        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-////        NSLog(@"%@", jsonString);
-//        
-//    } failure:^(NSURLSessionTask *task, NSError *error) {
-//        NSLog(@"请求站点数据失败!");
-//        
-//    }];
-//}
-
-
-/**
  描绘界面
  */
 -(void)customUI{
@@ -78,24 +47,19 @@
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, WIDTH, HEIGHT-20) style:UITableViewStyleGrouped];
     
     _ticketDelegate = [[TicketTableViewDelegate alloc]initWithTableView:_tableView dataSource:_dataSource viewController:self];
-//    NSLog(@"%@",_ticketDelegate);
-    
-    
-    __weak typeof(self)weakSelf = self;
-    self.block = ^(NSString *newPlace,NSInteger indexRow){
-        __strong typeof (weakSelf)strongSelf = weakSelf;
-        
-        Model *model = strongSelf.dataSource[indexRow];
-        model.detalTitle = newPlace;
-        [strongSelf.dataSource replaceObjectAtIndex:indexRow withObject:model];
-         [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexRow inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-    };
-    
+    _ticketDelegate.dateString = [self today];
     
     [self.view addSubview:_tableView];
     [_tableView reloadData];
 }
 
+-(NSString *)today
+{
+    NSDate *today = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    return [dateFormatter stringFromDate:today];
+}
 /**
  生成数据源
  */
@@ -207,9 +171,17 @@
 {
     NSInteger index = [change[@"index"] integerValue];
     Model *model = self.dataSource[index];
-    model.detalTitle = change[@"detail"];
+    model.detalTitle = [change[@"detail"] componentsSeparatedByString:@"年"][1];
     [self.dataSource replaceObjectAtIndex:index withObject:model];
-//    [_tableView reloadData];
+    NSString *original = change[@"detail"];
+    NSArray *arr = [original componentsSeparatedByString:@"月"];
+    NSString *yearAndMonth = [arr[0] stringByReplacingOccurrencesOfString:@"年" withString:@"-"];
+    yearAndMonth = yearAndMonth.length==7?yearAndMonth:[yearAndMonth stringByReplacingCharactersInRange:NSMakeRange(0, 5) withString:[NSString stringWithFormat:@"%@0",[yearAndMonth substringToIndex:5]]];
+    NSString *day = [arr[1] substringToIndex:((NSString *)arr[1]).length-1];
+    day = day.length==1?[NSString stringWithFormat:@"0%@",day]:day;
+    
+    _ticketDelegate.dateString = [NSMutableString stringWithFormat:@"%@-%@",yearAndMonth,day];
+    
     [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

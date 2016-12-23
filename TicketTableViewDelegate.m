@@ -13,6 +13,10 @@
 #import "StationTableViewController.h"
 #import "HDAppDelegate.h"
 #import "TicketViewController.h"
+#import "HDTicketInfoTableViewController.h"
+#import "MBProgressHUD.h"
+#import "HDTrainInfoModel.h"
+
 
 @interface TicketTableViewDelegate()
 
@@ -107,22 +111,54 @@
         }
         
     }else if (indexPath.section==1){
+        
         //查询操作 并保存最近查询的出发地和目的地
-        //获取出发和到达地点
-//        NSString *departure = ((Model *)self.source[0]).detalTitle;
-//        NSString *arrival = ((Model *)self.source[1]).detalTitle;
-        //生成查询URL
-//        NSURL *url = [NSURL URLWithString:CHECK(departure,arrival,APPKEY)];
-//        [self.netHandle activateWithURL:url headers:nil params:nil method:Get success:^(NSURLSessionDataTask *task, NSDictionary *dic) {
-//            NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-//            NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//            
-//            NSLog(@"jsonString--%@", jsonString);
-//            
-//        } failure:^(NSURLSessionTask *task, NSError *error) {
-//            
-//            NSLog(@"%@",error);
-//        }];   
+        
+        
+        NSString *departure = ((Model *)self.source[0]).detalTitle;
+        NSString *arrival = ((Model *)self.source[1]).detalTitle;
+        NSString *date = self.dateString;
+        HDTicketInfoTableViewController *ticketInfoVC = [[HDTicketInfoTableViewController alloc]init];
+        [self.viewController.navigationController pushViewController:ticketInfoVC animated:YES];
+         NSURL *url = [NSURL URLWithString:LEFTTicket(APPKEY,departure,arrival,date)];
+        [self.netHandle activateWithURL:url headers:nil params:nil method:Get success:^(NSURLSessionDataTask *task, NSDictionary *dic) {
+            
+            NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+            NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"jsonString--%@", jsonString);
+            
+            if ([dic[@"reason"] isEqualToString:@"查询成功"]) {
+               NSArray *arr = dic[@"result"];
+                for (NSDictionary *dict in arr) {
+                    //比对一下时间30分钟后的才显示出来
+//                    if (dict[@"start_time"]) {
+//                        
+//                    }
+                    
+                    HDTrainInfoModel *model = [HDTrainInfoModel new];
+                    model.start_time = dict[@"start_time"];
+                    model.start_station_name = dict[@"start_station_name"];
+                    model.end_station_name = dict[@"end_station_name"];
+                    model.from_station_name = dict[@"from_station_name"];
+                    model.to_station_name = dict[@"to_station_name"];
+                    model.train_no = dict[@"train_no"];
+                    model.zy_num = dict[@"zy_num"];
+                    model.wz_num = dict[@"wz_num"];
+                    model.ze_num = dict[@"ze_num"];
+                    model.lishi = dict[@"lishi"];
+                    model.arrive_time = dict[@"arrive_time"];
+                    [ticketInfoVC.dataSource addObject:model];
+                }
+            }
+            [ticketInfoVC.tableView reloadData];
+            //请求太快 导致错位
+            [MBProgressHUD hideHUDForView:[HD_APP_DELEGATE topViewController].view animated:YES];
+            
+        } failure:^(NSURLSessionTask *task, NSError *error) {
+            
+            NSLog(@"%@",error);
+            [MBProgressHUD hideHUDForView:[HD_APP_DELEGATE topViewController].view animated:YES];
+        }];   
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -135,50 +171,3 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

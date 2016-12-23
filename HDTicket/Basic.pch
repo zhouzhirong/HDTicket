@@ -24,10 +24,19 @@
 #if DEBUG
 #define NSLog(FORMAT, ...) fprintf(stderr,"\nfunction:%s line:%d content:%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #endif
+/*
+ 请求示例：http://apis.juhe.cn/train/yp?key=%@&dtype=json&from=%@&to=%@&date=%@&tt=
+ */
 
+//余票查询  不包含票价
+#define LEFTTicket(s1,s2,s3,s4) [[NSString stringWithFormat:@"http://apis.juhe.cn/train/yp?key=%@&dtype=json&from=%@&to=%@&date=%@",s1,s2,s3,s4] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet]
+//站点查询
 #define STATIONS @"http://apis.juhe.cn/train/station.list.php?key=7e564763c17f05d3a4fa5bdc69fc106b"
 
+//站到站查询 不包含余票  包含价格
 #define CHECK(s1,s2,s3) [[NSString stringWithFormat:@"http://apis.juhe.cn/train/s2swithprice?start=%@&end=%@&key=%@",s1,s2,s3] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet]
+
+
 
 #define IMAGE(name) [UIImage imageNamed:name]
 

@@ -206,7 +206,7 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     NSInteger i = indexPath.row;
     day = i - firstWeekday + 1;
     //这里利用代理处理回调
-    
+   
     UIViewController *calenderVC = (UIViewController *)self.superview.nextResponder;
     [calenderVC.navigationController popViewControllerAnimated:YES];
     
@@ -215,7 +215,7 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     if ([self.delegate respondsToSelector:@selector(updateTableViewWithSource:)]) {
         NSDictionary *dic = @{
                               @"index":@2,
-                              @"detail":[NSString stringWithFormat:@"%ld月%ld日",[comp month],day]
+                              @"detail":[NSString stringWithFormat:@"%ld年%ld月%ld日",[comp year],[comp month],day]
                               };
         [self.delegate updateTableViewWithSource:dic];
     }

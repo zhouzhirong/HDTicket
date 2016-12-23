@@ -17,8 +17,6 @@
 
 /**
  为什么会走多次: 复用--从缓存池中取出来的cell没有这个属性 所以会在此创建一次导致会创建两个label   如果复用很多的话就会创建很多个！！！
-
- @return <#return value description#>
  */
 -(UILabel *)label{
     if (!_label) {

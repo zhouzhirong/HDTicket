@@ -19,4 +19,6 @@ typedef  NS_ENUM(NSInteger,StationType){
 @property (nonatomic,assign)StationType stationType;
 @property (nonatomic,strong) UISearchController *searchController;
 @property (nonatomic,copy) void(^searchSuccessBlock)(NSString *,NSInteger);
+
+
 @end

@@ -19,6 +19,12 @@
 		69B430EB1E078A5F00E9F4D4 /* Station.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69B430E91E078A5F00E9F4D4 /* Station.xcdatamodeld */; };
 		69B4310D1E07ADD400E9F4D4 /* Station+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B4310A1E07ADD400E9F4D4 /* Station+CoreDataClass.m */; };
 		69B4310E1E07ADD400E9F4D4 /* Station+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B4310C1E07ADD400E9F4D4 /* Station+CoreDataProperties.m */; };
+		69B731B51E0B776600E6C001 /* HDTicketInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B731B31E0B776600E6C001 /* HDTicketInfoTableViewController.m */; };
+		69B731B61E0B776600E6C001 /* HDTicketInfoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B731B41E0B776600E6C001 /* HDTicketInfoTableViewController.xib */; };
+		69B731BA1E0B79A600E6C001 /* HDTrainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B731B81E0B79A600E6C001 /* HDTrainInfoCell.m */; };
+		69B731BB1E0B79A600E6C001 /* HDTrainInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B731B91E0B79A600E6C001 /* HDTrainInfoCell.xib */; };
+		69B731BE1E0B79D300E6C001 /* HDTrainInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B731BD1E0B79D300E6C001 /* HDTrainInfoModel.m */; };
+		69B731D51E0BD36400E6C001 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B731D41E0BD36400E6C001 /* MBProgressHUD.m */; };
 		69E78C511E067EF300BA9FE7 /* HDLocalDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E78C501E067EF300BA9FE7 /* HDLocalDataManager.m */; };
 		69E78C561E06A17900BA9FE7 /* HDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E78C551E06A17900BA9FE7 /* HDRootViewController.m */; };
 		69FD80B11DFE4C07003620BF /* order_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69FD80AA1DFE4C07003620BF /* order_normal@2x.png */; };
@@ -75,6 +81,16 @@
 		69B4310A1E07ADD400E9F4D4 /* Station+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Station+CoreDataClass.m"; sourceTree = "<group>"; };
 		69B4310B1E07ADD400E9F4D4 /* Station+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Station+CoreDataProperties.h"; sourceTree = "<group>"; };
 		69B4310C1E07ADD400E9F4D4 /* Station+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Station+CoreDataProperties.m"; sourceTree = "<group>"; };
+		69B731B21E0B776600E6C001 /* HDTicketInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDTicketInfoTableViewController.h; sourceTree = "<group>"; };
+		69B731B31E0B776600E6C001 /* HDTicketInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDTicketInfoTableViewController.m; sourceTree = "<group>"; };
+		69B731B41E0B776600E6C001 /* HDTicketInfoTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDTicketInfoTableViewController.xib; sourceTree = "<group>"; };
+		69B731B71E0B79A600E6C001 /* HDTrainInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDTrainInfoCell.h; sourceTree = "<group>"; };
+		69B731B81E0B79A600E6C001 /* HDTrainInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDTrainInfoCell.m; sourceTree = "<group>"; };
+		69B731B91E0B79A600E6C001 /* HDTrainInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDTrainInfoCell.xib; sourceTree = "<group>"; };
+		69B731BC1E0B79D300E6C001 /* HDTrainInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDTrainInfoModel.h; sourceTree = "<group>"; };
+		69B731BD1E0B79D300E6C001 /* HDTrainInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDTrainInfoModel.m; sourceTree = "<group>"; };
+		69B731D31E0BD36400E6C001 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		69B731D41E0BD36400E6C001 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		69E78C4F1E067EF300BA9FE7 /* HDLocalDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDLocalDataManager.h; sourceTree = "<group>"; };
 		69E78C501E067EF300BA9FE7 /* HDLocalDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDLocalDataManager.m; sourceTree = "<group>"; };
 		69E78C541E06A17900BA9FE7 /* HDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDRootViewController.h; sourceTree = "<group>"; };
@@ -191,16 +207,24 @@
 			isa = PBXGroup;
 			children = (
 				69E78C4A1E067D5B00BA9FE7 /* Controllers */,
-				69E78C4B1E067DA200BA9FE7 /* Views */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		69B731D21E0BD36400E6C001 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				69B731D31E0BD36400E6C001 /* MBProgressHUD.h */,
+				69B731D41E0BD36400E6C001 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		69E78C481E067CD700BA9FE7 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				69B731D21E0BD36400E6C001 /* MBProgressHUD */,
 				69E78C4E1E067ED400BA9FE7 /* DataManager */,
-				69FD810D1DFFF78D003620BF /* TableViewDelegate */,
 				69E78C4C1E067E0F00BA9FE7 /* Net_module */,
 			);
 			name = Logic;
@@ -211,6 +235,8 @@
 			children = (
 				69FD80E81DFEDEC2003620BF /* Model.h */,
 				69FD80E91DFEDEC2003620BF /* Model.m */,
+				69B731BC1E0B79D300E6C001 /* HDTrainInfoModel.h */,
+				69B731BD1E0B79D300E6C001 /* HDTrainInfoModel.m */,
 				69B431091E07ADD400E9F4D4 /* Station+CoreDataClass.h */,
 				69B4310A1E07ADD400E9F4D4 /* Station+CoreDataClass.m */,
 				69B4310B1E07ADD400E9F4D4 /* Station+CoreDataProperties.h */,
@@ -232,22 +258,12 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		69E78C4B1E067DA200BA9FE7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				69FD80E51DFED132003620BF /* CustomCell.h */,
-				69FD80E61DFED132003620BF /* CustomCell.m */,
-				69FD81041DFFA839003620BF /* Calender_module */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		69E78C4C1E067E0F00BA9FE7 /* Net_module */ = {
 			isa = PBXGroup;
 			children = (
+				69FD812E1E00D90C003620BF /* AFNetworking */,
 				69FD81421E00DDCF003620BF /* NetworkHandle.h */,
 				69FD81431E00DDCF003620BF /* NetworkHandle.m */,
-				69FD812E1E00D90C003620BF /* AFNetworking */,
 			);
 			name = Net_module;
 			sourceTree = "<group>";
@@ -282,10 +298,23 @@
 		69FD80DF1DFEC80C003620BF /* Ticket */ = {
 			isa = PBXGroup;
 			children = (
+				69FD80E51DFED132003620BF /* CustomCell.h */,
+				69FD80E61DFED132003620BF /* CustomCell.m */,
 				69A7FB7D1DFE41230006F957 /* TicketViewController.h */,
 				69A7FB7E1DFE41230006F957 /* TicketViewController.m */,
+				69FD80E21DFEC88C003620BF /* TicketTableViewDelegate.h */,
+				69FD80E31DFEC88C003620BF /* TicketTableViewDelegate.m */,
 				69FD810E1DFFF89F003620BF /* StationTableViewController.h */,
 				69FD810F1DFFF89F003620BF /* StationTableViewController.m */,
+				69B430E31E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.h */,
+				69B430E41E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m */,
+				69B731B71E0B79A600E6C001 /* HDTrainInfoCell.h */,
+				69B731B81E0B79A600E6C001 /* HDTrainInfoCell.m */,
+				69B731B91E0B79A600E6C001 /* HDTrainInfoCell.xib */,
+				69B731B21E0B776600E6C001 /* HDTicketInfoTableViewController.h */,
+				69B731B31E0B776600E6C001 /* HDTicketInfoTableViewController.m */,
+				69B731B41E0B776600E6C001 /* HDTicketInfoTableViewController.xib */,
+				69FD81041DFFA839003620BF /* Calender_module */,
 				69FD80F51DFF8348003620BF /* CalenderViewController.h */,
 				69FD80F61DFF8348003620BF /* CalenderViewController.m */,
 			);
@@ -320,17 +349,6 @@
 				69FD81091DFFA851003620BF /* HDCalenderCell.m */,
 			);
 			name = Calender_module;
-			sourceTree = "<group>";
-		};
-		69FD810D1DFFF78D003620BF /* TableViewDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				69FD80E21DFEC88C003620BF /* TicketTableViewDelegate.h */,
-				69FD80E31DFEC88C003620BF /* TicketTableViewDelegate.m */,
-				69B430E31E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.h */,
-				69B430E41E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m */,
-			);
-			name = TableViewDelegate;
 			sourceTree = "<group>";
 		};
 		69FD812E1E00D90C003620BF /* AFNetworking */ = {
@@ -385,7 +403,7 @@
 				TargetAttributes = {
 					69A7FB4F1DFA92490006F957 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = P8JMZVFVGC;
+						DevelopmentTeam = 5385PMS2GL;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -419,6 +437,7 @@
 				69FD810B1DFFA851003620BF /* HDCalendarPicker.xib in Resources */,
 				69FD80F11DFEF0BD003620BF /* arrival@2x.png in Resources */,
 				69FD80B61DFE4C07003620BF /* ticket_normal@2x.png in Resources */,
+				69B731BB1E0B79A600E6C001 /* HDTrainInfoCell.xib in Resources */,
 				69FD80DC1DFE84FB003620BF /* Assets.xcassets in Resources */,
 				69A7FB5E1DFA92490006F957 /* Main.storyboard in Resources */,
 				69FD80B51DFE4C07003620BF /* refresh.png in Resources */,
@@ -428,6 +447,7 @@
 				69FD80DE1DFEA3E4003620BF /* switch@2x.png in Resources */,
 				69FD80F41DFEF0C4003620BF /* departure@2x.png in Resources */,
 				69FD80B11DFE4C07003620BF /* order_normal@2x.png in Resources */,
+				69B731B61E0B776600E6C001 /* HDTicketInfoTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,19 +466,23 @@
 				69B430E51E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m in Sources */,
 				69FD80EA1DFEDEC2003620BF /* Model.m in Sources */,
 				69FD81411E00D90C003620BF /* AFURLSessionManager.m in Sources */,
+				69B731D51E0BD36400E6C001 /* MBProgressHUD.m in Sources */,
 				69A7FB581DFA92490006F957 /* HDAppDelegate.m in Sources */,
+				69B731BA1E0B79A600E6C001 /* HDTrainInfoCell.m in Sources */,
 				69B430EB1E078A5F00E9F4D4 /* Station.xcdatamodeld in Sources */,
 				69FD81441E00DDCF003620BF /* NetworkHandle.m in Sources */,
 				69FD813D1E00D90C003620BF /* AFNetworkReachabilityManager.m in Sources */,
 				69A7FB821DFE41350006F957 /* OrderViewController.m in Sources */,
 				69FD81401E00D90C003620BF /* AFURLResponseSerialization.m in Sources */,
 				69FD813F1E00D90C003620BF /* AFURLRequestSerialization.m in Sources */,
+				69B731BE1E0B79D300E6C001 /* HDTrainInfoModel.m in Sources */,
 				69FD813E1E00D90C003620BF /* AFSecurityPolicy.m in Sources */,
 				69A7FB7F1DFE41230006F957 /* TicketViewController.m in Sources */,
 				69B4310D1E07ADD400E9F4D4 /* Station+CoreDataClass.m in Sources */,
 				69A7FB551DFA92490006F957 /* main.m in Sources */,
 				69FD80F71DFF8348003620BF /* CalenderViewController.m in Sources */,
 				69FD810C1DFFA851003620BF /* HDCalenderCell.m in Sources */,
+				69B731B51E0B776600E6C001 /* HDTicketInfoTableViewController.m in Sources */,
 				69E78C561E06A17900BA9FE7 /* HDRootViewController.m in Sources */,
 				69FD813C1E00D90C003620BF /* AFHTTPSessionManager.m in Sources */,
 				69FD810A1DFFA851003620BF /* HDCalendarPicker.m in Sources */,
@@ -580,13 +604,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = P8JMZVFVGC;
+				DEVELOPMENT_TEAM = 5385PMS2GL;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HDTicket/Basic.pch";
 				INFOPLIST_FILE = HDTicket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HaoDuo.HDTicket000;
+				PRODUCT_BUNDLE_IDENTIFIER = HMORE.more;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -595,13 +619,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = P8JMZVFVGC;
+				DEVELOPMENT_TEAM = 5385PMS2GL;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HDTicket/Basic.pch";
 				INFOPLIST_FILE = HDTicket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HaoDuo.HDTicket000;
+				PRODUCT_BUNDLE_IDENTIFIER = HMORE.more;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
