@@ -10,9 +10,12 @@
 #import "MBProgressHUD.h"
 #import "HDTrainInfoCell.h"
 #import "HDTrainInfoModel.h"
+#import "HDBottomBanner.h"
 @interface HDTicketInfoTableViewController ()
 
-  //数据源
+@property (nonatomic , strong)UIView *footer;
+
+@property (nonatomic , strong)HDBottomBanner *bottomBanner;
 
 @end
 @implementation HDTicketInfoTableViewController
@@ -33,7 +36,26 @@
     return self;
 }
 
+-(UILabel *)errorLabel
+{
+    if (!_errorLabel) {
+        _errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 200, WIDTH, 30)];
+        _errorLabel.textAlignment = NSTextAlignmentCenter;
+        _errorLabel.text = @"抱歉！没有查询到相关车次";
+    }
+    return _errorLabel;
+}
 
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [_bottomBanner setFrame:CGRectMake(0, HEIGHT-42, WIDTH, 42)];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_bottomBanner setFrame:CGRectMake(0, HEIGHT, WIDTH, 42)];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,8 +64,50 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithImage:[IMAGE(@"share") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(shareToWechat)];
+     self.navigationItem.rightBarButtonItem = share;
 }
+//微信分享
+-(void)shareToWechat
+{
+    
+}
+
+-(UIView *)footer
+{
+    if (!_footer) {
+        _footer = [[UIView alloc]initWithFrame:CGRectMake(0, 100, WIDTH, 40)];
+        _footer.backgroundColor = [UIColor clearColor];
+        UILabel *tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 3, WIDTH-80, 34)];
+        tipLabel.text = @"没票不用怕,抢票成功率高达80%";
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        tipLabel.textColor = RGB(25, 25, 25);
+        tipLabel.font = [UIFont systemFontOfSize:15];
+        UIButton *shootBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shootBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [shootBtn setTintColor:[UIColor whiteColor]];
+        [shootBtn setTitle:@"抢票" forState:UIControlStateNormal];
+        shootBtn.backgroundColor = RGB(10, 105, 255);
+        [shootBtn setFrame:CGRectMake(WIDTH-65, 3, 45, 30)];
+        [shootBtn.layer setCornerRadius:8];
+        [shootBtn.layer setMasksToBounds:YES];
+        [_footer addSubview:shootBtn];
+        [_footer addSubview:tipLabel];
+    }
+    return _footer;
+}
+
+-(HDBottomBanner *)bottomBanner
+{
+    if (!_bottomBanner)
+    {
+        _bottomBanner = [[NSBundle mainBundle]loadNibNamed:@"HDBottomBanner" owner:self options:nil].firstObject;
+        [_bottomBanner setFrame:CGRectMake(0, HEIGHT-42, WIDTH, 42)];
+        [[UIApplication sharedApplication].keyWindow addSubview:_bottomBanner];
+    }
+    return _bottomBanner;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -59,11 +123,14 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    NSLog(@"%ld",_dataSource.count);
     return _dataSource.count;
 }
-
+-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_dataSource.count>0) {
+        self.tableView.tableFooterView = self.footer;
+    }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -77,6 +144,8 @@
 {
     return 84;
 }
+
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -125,6 +194,7 @@
     
     // Push the view controller.
 //    [self.navigationController pushViewController:detailViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
@@ -138,7 +208,48 @@
 }
 */
 
+float lastContentOffset;
 
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    lastContentOffset = scrollView.contentOffset.y;
+}
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (lastContentOffset > scrollView.contentOffset.y) {
+        self.bottomBanner.dateString = self.dateStringForBannerLabel;
+        [UIView animateWithDuration:0.25 animations:^{
+
+            [_bottomBanner setFrame:CGRectMake(0, HEIGHT-42, WIDTH, 42)];
+        }];
+        
+    }else{
+        self.bottomBanner.dateString = self.dateStringForBannerLabel;
+        [UIView animateWithDuration:0.25 animations:^{
+
+            [_bottomBanner setFrame:CGRectMake(0, HEIGHT, WIDTH, 42)];
+        }];
+    }
+    lastContentOffset = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (lastContentOffset > scrollView.contentOffset.y) {
+        self.bottomBanner.dateString = self.dateStringForBannerLabel;
+        [UIView animateWithDuration:0.25 animations:^{
+            
+            [_bottomBanner setFrame:CGRectMake(0, HEIGHT-42, WIDTH, 42)];
+        }];
+        
+    }else{
+        self.bottomBanner.dateString = self.dateStringForBannerLabel;
+        [UIView animateWithDuration:0.25 animations:^{
+            
+            [_bottomBanner setFrame:CGRectMake(0, HEIGHT, WIDTH, 42)];
+        }];
+    } 
+}
 
 @end

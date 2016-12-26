@@ -24,9 +24,10 @@
 #if DEBUG
 #define NSLog(FORMAT, ...) fprintf(stderr,"\nfunction:%s line:%d content:%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #endif
-/*
- 请求示例：http://apis.juhe.cn/train/yp?key=%@&dtype=json&from=%@&to=%@&date=%@&tt=
- */
+
+#define CONNECTING [UIApplication sharedApplication].networkActivityIndicatorVisible = YES
+
+#define DISCONNECTED [UIApplication sharedApplication].networkActivityIndicatorVisible = NO
 
 //余票查询  不包含票价
 #define LEFTTicket(s1,s2,s3,s4) [[NSString stringWithFormat:@"http://apis.juhe.cn/train/yp?key=%@&dtype=json&from=%@&to=%@&date=%@",s1,s2,s3,s4] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet]
@@ -44,8 +45,7 @@
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
 
 #define RGB(a,b,c) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:1]
-//#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
-//#define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)
+
 
 
 

@@ -13,7 +13,7 @@
 
 @interface TicketTableViewDelegate : NSObject<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic , copy)NSString *dateString;
+@property(nonatomic,copy)NSString *dateString;  //日期  格式:"2017-01-01"
 
 -(TicketTableViewDelegate *)initWithTableView:(UITableView *)tableView dataSource:(nullable NSArray *)source viewController:(TicketViewController *)viewController;
 

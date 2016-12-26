@@ -46,55 +46,50 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     [_collectionView setCollectionViewLayout:layout animated:YES];
 }
 
-
+//date 的set方法 主要驱动力
 - (void)setDate:(NSDate *)date
 {
     _date = date;
-    [_monthLabel setText:[NSString stringWithFormat:@"%.2ld-%li",(long)[self year:date],(long)[self month:date]]];
+    [_monthLabel setText:[NSString stringWithFormat:@"%.2ld 年 %li 月",(long)[self year:date],(long)[self month:date]]];
     _monthLabel.textAlignment = NSTextAlignmentCenter;
     [_monthLabel setTextColor:[UIColor blackColor]];
-    [_collectionView reloadData];
+    [_collectionView reloadData]; //主要驱动力
 }
 
 #pragma mark - date
-
+//日期
 - (NSInteger)day:(NSDate *)date{
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
     return [components day];
 }
-
-
+//月份
 - (NSInteger)month:(NSDate *)date{
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
     return [components month];
 }
-
+//年份
 - (NSInteger)year:(NSDate *)date{
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
     return [components year];
 }
 
-
+//当月1号为星期几,2016年12月1号---周四     按照周日为每周第一天计算
 - (NSInteger)firstWeekdayInThisMonth:(NSDate *)date{
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    
+    //设置周日 为每个星期第一天
     [calendar setFirstWeekday:1];//1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
     NSDateComponents *comp = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
     [comp setDay:1];
+    // 当月的第一天 date类型
     NSDate *firstDayOfMonthDate = [calendar dateFromComponents:comp];
     
     NSUInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonthDate];
     return firstWeekday - 1;
 }
 
-- (NSInteger)totaldaysInThisMonth:(NSDate *)date{
+- (NSInteger)totaldaysInMonth:(NSDate *)date{
     NSRange totaldaysInMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
     return totaldaysInMonth.length;
-}
-
-- (NSInteger)totaldaysInMonth:(NSDate *)date{
-    NSRange daysInLastMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
-    return daysInLastMonth.length;
 }
 
 - (NSDate *)lastMonth:(NSDate *)date{
@@ -111,6 +106,19 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     return newDate;
 }
 
+//给定date日期,求星期几
+- (NSString *)weekdayStringFromDate:(NSDate *)date
+{
+    NSArray *weekdays = @[[NSNull null], @"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSTimeZone *timezone = [[NSTimeZone alloc]initWithName:@"Asia/Shanghai"];
+    [calendar setTimeZone:timezone];
+    NSCalendarUnit unit = NSCalendarUnitWeekday;
+    NSDateComponents *comp = [calendar components:unit fromDate:date];
+    return [weekdays objectAtIndex:comp.weekday];
+}
+
+
 #pragma -mark collectionView delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -122,10 +130,10 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     if (section == 0) {
         return _weekDayArray.count;
     } else {
-        return 35;
+        return 42;
     }
 }
-
+// 以2016年 12月为例分析
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HDCalendarCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HDCalendarCellIdentifier forIndexPath:indexPath];
@@ -134,35 +142,49 @@ NSString *const HDCalendarCellIdentifier = @"cell";
          //星期的颜色
         [cell.dateLabel setTextColor:[UIColor blackColor]];
     } else {
+        //每个月多少天 31
         NSInteger daysInThisMonth = [self totaldaysInMonth:_date];
+        //每个月第一天是星期几
         NSInteger firstWeekday = [self firstWeekdayInThisMonth:_date];
         
         NSInteger day = 0;
+        //i 表示第几个item
         NSInteger i = indexPath.row;
         
-        if (i < firstWeekday) {
+        if (i < firstWeekday) {  /*  小于4号的情况-----属于上一个月 */
+            
             [cell.dateLabel setText:@""];
             
-        }else if (i > firstWeekday + daysInThisMonth - 1){
+        }else if (i > firstWeekday + daysInThisMonth - 1){  /*  属于下一个月  */
+            
             [cell.dateLabel setText:@""];
-        }else{
+            
+        }else{    /*  属于这个月 day==1 代表1号那一天 */
             day = i - firstWeekday + 1;
             [cell.dateLabel setText:[NSString stringWithFormat:@"%li",(long)day]];
             //早于当前日期的颜色
             [cell.dateLabel setTextColor:RGB(159, 159, 159)];
             
             //this month
-            if ([_today isEqualToDate:_date]) {
-                if (day == [self day:_date]) {
+            if ([_today isEqualToDate:_date])
+            {
+                if (day == [self day:_date])
+                {
                     //当日的颜色
                     [cell.dateLabel setTextColor:[UIColor redColor]];
-                } else if (day > [self day:_date]) {
+                } else if (day > [self day:_date])
+                {
                      //当月未到来的日期颜色
                     [cell.dateLabel setTextColor:[UIColor blackColor]];
                 }
-            } else if ([_today compare:_date] == NSOrderedAscending) {
+            } else if ([_today compare:_date] == NSOrderedAscending)
+            {
                 //除当月外 将来时间的颜色
                 [cell.dateLabel setTextColor:[UIColor blackColor]];
+            } else if ([_today compare:_date] == NSOrderedDescending)
+            {
+                //过去的月份
+                [cell.dateLabel setTextColor:RGB(159, 159, 159)];
             }
         }
     }
@@ -188,7 +210,7 @@ NSString *const HDCalendarCellIdentifier = @"cell";
                 {
                     return YES;
                 }
-            } else if ([_today compare:_date] == NSOrderedAscending)
+            } else if ([_today compare:_date] == NSOrderedAscending) //NSOrderedAscending = -1 _today<_date
             {
                 return YES;
             }
@@ -205,6 +227,7 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     NSInteger day = 0;
     NSInteger i = indexPath.row;
     day = i - firstWeekday + 1;
+    
     //这里利用代理处理回调
    
     UIViewController *calenderVC = (UIViewController *)self.superview.nextResponder;
@@ -219,8 +242,6 @@ NSString *const HDCalendarCellIdentifier = @"cell";
                               };
         [self.delegate updateTableViewWithSource:dic];
     }
-    
-//    [self hide];
 }
 
 - (IBAction)previouseAction:(UIButton *)sender
@@ -237,6 +258,10 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     } completion:nil];
 }
 
+
+/**
+ 这个view是VC.view
+ */
 + (instancetype)showOnView:(UIView *)view
 {
     HDCalendarPicker *calendarPicker = [[[NSBundle mainBundle] loadNibNamed:@"HDCalendarPicker" owner:self options:nil] firstObject];

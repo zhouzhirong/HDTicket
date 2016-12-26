@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		699EA8D21E0FE7E80032161F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 699EA8D11E0FE7E80032161F /* share@2x.png */; };
 		69A7FB551DFA92490006F957 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A7FB541DFA92490006F957 /* main.m */; };
 		69A7FB581DFA92490006F957 /* HDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A7FB571DFA92490006F957 /* HDAppDelegate.m */; };
 		69A7FB5E1DFA92490006F957 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A7FB5C1DFA92490006F957 /* Main.storyboard */; };
@@ -15,6 +16,8 @@
 		69A7FB7F1DFE41230006F957 /* TicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A7FB7E1DFE41230006F957 /* TicketViewController.m */; };
 		69A7FB821DFE41350006F957 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A7FB811DFE41350006F957 /* OrderViewController.m */; };
 		69A7FB851DFE41420006F957 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A7FB841DFE41420006F957 /* PersonalViewController.m */; };
+		69B1A5901E0D284B0005B654 /* HDBottomBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B1A58F1E0D284B0005B654 /* HDBottomBanner.m */; };
+		69B1A5921E0D29460005B654 /* HDBottomBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B1A5911E0D29460005B654 /* HDBottomBanner.xib */; };
 		69B430E51E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B430E41E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m */; };
 		69B430EB1E078A5F00E9F4D4 /* Station.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69B430E91E078A5F00E9F4D4 /* Station.xcdatamodeld */; };
 		69B4310D1E07ADD400E9F4D4 /* Station+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B4310A1E07ADD400E9F4D4 /* Station+CoreDataClass.m */; };
@@ -59,6 +62,7 @@
 /* Begin PBXFileReference section */
 		692F79E61E0846A100D70217 /* Station 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Station 2.xcdatamodel"; sourceTree = "<group>"; };
 		692F79FA1E0856AA00D70217 /* Station 2.0.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Station 2.0.1.xcdatamodel"; sourceTree = "<group>"; };
+		699EA8D11E0FE7E80032161F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		69A7FB501DFA92490006F957 /* HDTicket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDTicket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69A7FB541DFA92490006F957 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		69A7FB561DFA92490006F957 /* HDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDAppDelegate.h; sourceTree = "<group>"; };
@@ -74,6 +78,9 @@
 		69A7FB811DFE41350006F957 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		69A7FB831DFE41420006F957 /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
 		69A7FB841DFE41420006F957 /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
+		69B1A58E1E0D284B0005B654 /* HDBottomBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDBottomBanner.h; sourceTree = "<group>"; };
+		69B1A58F1E0D284B0005B654 /* HDBottomBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDBottomBanner.m; sourceTree = "<group>"; };
+		69B1A5911E0D29460005B654 /* HDBottomBanner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDBottomBanner.xib; sourceTree = "<group>"; };
 		69B430E31E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDStationFetchedResultsControllerDataSource.h; sourceTree = "<group>"; };
 		69B430E41E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDStationFetchedResultsControllerDataSource.m; sourceTree = "<group>"; };
 		69B430EA1E078A5F00E9F4D4 /* Station.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Station.xcdatamodel; sourceTree = "<group>"; };
@@ -280,6 +287,7 @@
 		69FD80A91DFE4C07003620BF /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				699EA8D11E0FE7E80032161F /* share@2x.png */,
 				69FD80F31DFEF0C4003620BF /* departure@2x.png */,
 				69FD80EF1DFEF0BD003620BF /* arrival@2x.png */,
 				69FD80F01DFEF0BD003620BF /* date@2x.png */,
@@ -308,6 +316,9 @@
 				69FD810F1DFFF89F003620BF /* StationTableViewController.m */,
 				69B430E31E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.h */,
 				69B430E41E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m */,
+				69B1A58E1E0D284B0005B654 /* HDBottomBanner.h */,
+				69B1A58F1E0D284B0005B654 /* HDBottomBanner.m */,
+				69B1A5911E0D29460005B654 /* HDBottomBanner.xib */,
 				69B731B71E0B79A600E6C001 /* HDTrainInfoCell.h */,
 				69B731B81E0B79A600E6C001 /* HDTrainInfoCell.m */,
 				69B731B91E0B79A600E6C001 /* HDTrainInfoCell.xib */,
@@ -315,8 +326,6 @@
 				69B731B31E0B776600E6C001 /* HDTicketInfoTableViewController.m */,
 				69B731B41E0B776600E6C001 /* HDTicketInfoTableViewController.xib */,
 				69FD81041DFFA839003620BF /* Calender_module */,
-				69FD80F51DFF8348003620BF /* CalenderViewController.h */,
-				69FD80F61DFF8348003620BF /* CalenderViewController.m */,
 			);
 			name = Ticket;
 			sourceTree = "<group>";
@@ -347,6 +356,8 @@
 				69FD81071DFFA851003620BF /* HDCalendarPicker.xib */,
 				69FD81081DFFA851003620BF /* HDCalenderCell.h */,
 				69FD81091DFFA851003620BF /* HDCalenderCell.m */,
+				69FD80F51DFF8348003620BF /* CalenderViewController.h */,
+				69FD80F61DFF8348003620BF /* CalenderViewController.m */,
 			);
 			name = Calender_module;
 			sourceTree = "<group>";
@@ -435,7 +446,9 @@
 				69A7FB631DFA92490006F957 /* LaunchScreen.storyboard in Resources */,
 				69FD80B41DFE4C07003620BF /* personal_selected@2x.png in Resources */,
 				69FD810B1DFFA851003620BF /* HDCalendarPicker.xib in Resources */,
+				69B1A5921E0D29460005B654 /* HDBottomBanner.xib in Resources */,
 				69FD80F11DFEF0BD003620BF /* arrival@2x.png in Resources */,
+				699EA8D21E0FE7E80032161F /* share@2x.png in Resources */,
 				69FD80B61DFE4C07003620BF /* ticket_normal@2x.png in Resources */,
 				69B731BB1E0B79A600E6C001 /* HDTrainInfoCell.xib in Resources */,
 				69FD80DC1DFE84FB003620BF /* Assets.xcassets in Resources */,
@@ -474,6 +487,7 @@
 				69FD813D1E00D90C003620BF /* AFNetworkReachabilityManager.m in Sources */,
 				69A7FB821DFE41350006F957 /* OrderViewController.m in Sources */,
 				69FD81401E00D90C003620BF /* AFURLResponseSerialization.m in Sources */,
+				69B1A5901E0D284B0005B654 /* HDBottomBanner.m in Sources */,
 				69FD813F1E00D90C003620BF /* AFURLRequestSerialization.m in Sources */,
 				69B731BE1E0B79D300E6C001 /* HDTrainInfoModel.m in Sources */,
 				69FD813E1E00D90C003620BF /* AFSecurityPolicy.m in Sources */,

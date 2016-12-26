@@ -54,8 +54,6 @@
     return 1;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -110,51 +108,54 @@
             }
         }
         
-    }else if (indexPath.section==1){
-        
+    }
+    else if (indexPath.section==1){
         //查询操作 并保存最近查询的出发地和目的地
-        
-        
         NSString *departure = ((Model *)self.source[0]).detalTitle;
         NSString *arrival = ((Model *)self.source[1]).detalTitle;
         NSString *date = self.dateString;
         HDTicketInfoTableViewController *ticketInfoVC = [[HDTicketInfoTableViewController alloc]init];
+        ticketInfoVC.dateStringForBannerLabel = ((Model *)self.source[2]).detalTitle;
+        
+        [ticketInfoVC setHidesBottomBarWhenPushed:YES];
+        self.viewController.title = @"返回";
+        ticketInfoVC.title = [NSString stringWithFormat:@"%@ - %@",departure,arrival];
         [self.viewController.navigationController pushViewController:ticketInfoVC animated:YES];
          NSURL *url = [NSURL URLWithString:LEFTTicket(APPKEY,departure,arrival,date)];
+        CONNECTING;
         [self.netHandle activateWithURL:url headers:nil params:nil method:Get success:^(NSURLSessionDataTask *task, NSDictionary *dic) {
-            
+            DISCONNECTED;
             NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
             NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"jsonString--%@", jsonString);
-            
             if ([dic[@"reason"] isEqualToString:@"查询成功"]) {
                NSArray *arr = dic[@"result"];
                 for (NSDictionary *dict in arr) {
-                    //比对一下时间30分钟后的才显示出来
-//                    if (dict[@"start_time"]) {
-//                        
-//                    }
-                    
-                    HDTrainInfoModel *model = [HDTrainInfoModel new];
-                    model.start_time = dict[@"start_time"];
-                    model.start_station_name = dict[@"start_station_name"];
-                    model.end_station_name = dict[@"end_station_name"];
-                    model.from_station_name = dict[@"from_station_name"];
-                    model.to_station_name = dict[@"to_station_name"];
-                    model.train_no = dict[@"train_no"];
-                    model.zy_num = dict[@"zy_num"];
-                    model.wz_num = dict[@"wz_num"];
-                    model.swz_num = dict[@"swz_num"];
-                    model.ze_num = dict[@"ze_num"];
-                    model.lishi = dict[@"lishi"];
-                    model.yz_num = dict[@"yz_num"];
-                    model.yw_num = dict[@"yw_num"];
-                    model.rw_num = dict[@"rw_num"];
-                    model.arrive_time = dict[@"arrive_time"];
-                    [ticketInfoVC.dataSource addObject:model];
+//                    比对一下时间30分钟后发车的才显示出来
+                    if (check(self.dateString, dict[@"start_time"])) {
+                        HDTrainInfoModel *model = [HDTrainInfoModel new];
+                        model.start_time = dict[@"start_time"];
+                        model.start_station_name = dict[@"start_station_name"];
+                        model.end_station_name = dict[@"end_station_name"];
+                        model.from_station_name = dict[@"from_station_name"];
+                        model.to_station_name = dict[@"to_station_name"];
+                        model.train_no = dict[@"train_no"];
+                        model.zy_num = dict[@"zy_num"];
+                        model.wz_num = dict[@"wz_num"];
+                        model.swz_num = dict[@"swz_num"];
+                        model.ze_num = dict[@"ze_num"];
+                        model.lishi = dict[@"lishi"];
+                        model.yz_num = dict[@"yz_num"];
+                        model.yw_num = dict[@"yw_num"];
+                        model.rw_num = dict[@"rw_num"];
+                        model.arrive_time = dict[@"arrive_time"];
+                        [ticketInfoVC.dataSource addObject:model];
+                    }
                 }
+                [ticketInfoVC.tableView reloadData];
+            }else{
+                [ticketInfoVC.view addSubview:ticketInfoVC.errorLabel];
             }
-            [ticketInfoVC.tableView reloadData];
             //请求太快 导致错位
             [MBProgressHUD hideHUDForView:[HD_APP_DELEGATE topViewController].view animated:YES];
             
@@ -162,7 +163,7 @@
             
             NSLog(@"%@",error);
             [MBProgressHUD hideHUDForView:[HD_APP_DELEGATE topViewController].view animated:YES];
-        }];   
+        }];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -173,5 +174,27 @@
     HDAppDelegate *delegate = HD_APP_DELEGATE;
     return delegate.defaultNetHandle;
 }
+
+#pragma mark 超过当前时间30分钟的才显示
+//param 1  当前日期    param 2 当前时间
+BOOL check(NSString *dateString,NSString *timeString)
+{
+    //得到火车的出发时间字符串
+    NSString *compare = [[dateString stringByAppendingString:[NSString stringWithFormat:@" %@",timeString]] stringByAppendingString:@":00"];
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    [format setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    // 要确定的时间
+    NSDate *date = [format dateFromString:compare];
+    // 此时此刻
+    NSDate *now = [NSDate date];
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    NSInteger delta = [timeZone secondsFromGMT];
+    NSInteger secondCount = [date timeIntervalSince1970] - [now timeIntervalSince1970];
+    return secondCount > 1800+delta ? YES : NO;
+}
+
+
+
 
 @end

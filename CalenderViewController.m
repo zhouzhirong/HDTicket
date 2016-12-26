@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     [self UIsetup];
 }
 
@@ -25,25 +25,8 @@
 {
     self.title = @"请选择日期";
     HDCalendarPicker *calendarPicker = [HDCalendarPicker showOnView:self.view];
-    calendarPicker.today = [NSDate date];
+    calendarPicker.today = [NSDate date];          //当天
     calendarPicker.date = calendarPicker.today;
-    calendarPicker.frame = CGRectMake(0, 100, self.view.frame.size.width, 352);
-    
+    calendarPicker.frame = CGRectMake(0, 100, self.view.frame.size.width, 350);
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

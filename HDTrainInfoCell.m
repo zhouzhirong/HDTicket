@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger,TRAINTYPE) {
     _arriveStationType = [trainInfoModel.to_station_name isEqualToString:trainInfoModel.end_station_name] ? @"" : @"过·";
     
     _stationsInfo.text = [NSString stringWithFormat:@"%@%@ - %@%@",_startStationType,trainInfoModel.from_station_name,_arriveStationType,trainInfoModel.to_station_name];
-    
+    _stationsInfo.textColor = RGB(40, 40, 40);
     _departAndArrival.text = [NSString stringWithFormat:@"%@~%@",trainInfoModel.start_time,trainInfoModel.arrive_time];
     _departAndArrival.textColor = [UIColor lightGrayColor];
     _runtime.text = [NSString stringWithFormat:@"历时%@",trainInfoModel.lishi];

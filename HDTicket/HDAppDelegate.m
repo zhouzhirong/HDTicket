@@ -28,6 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
     NSSetUncaughtExceptionHandler(&caughtException);
     [self setupViewControllers];
     
