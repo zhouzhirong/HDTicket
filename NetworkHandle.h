@@ -12,7 +12,7 @@ typedef NS_ENUM(NSInteger,HDHttpMethod) {
     Get = 0,
     Post
 };
-typedef void (^HDSuccessBlock)(NSURLSessionDataTask *task, NSDictionary* data);
+typedef void (^HDSuccessBlock)(NSURLSessionDataTask *task, NSDictionary* dic);
 typedef void (^HDFailureBlock)(NSURLSessionTask *task, NSError *error);
 
 @interface NetworkHandle : NSObject

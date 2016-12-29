@@ -28,6 +28,8 @@
 		69B731BB1E0B79A600E6C001 /* HDTrainInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B731B91E0B79A600E6C001 /* HDTrainInfoCell.xib */; };
 		69B731BE1E0B79D300E6C001 /* HDTrainInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B731BD1E0B79D300E6C001 /* HDTrainInfoModel.m */; };
 		69B731D51E0BD36400E6C001 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B731D41E0BD36400E6C001 /* MBProgressHUD.m */; };
+		69C17A071E11182A00333D52 /* HDHeaderFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C17A061E11182A00333D52 /* HDHeaderFile.m */; };
+		69D908CD1E13588A00B5C0CA /* HDFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D908CC1E13588A00B5C0CA /* HDFilterViewController.m */; };
 		69E78C511E067EF300BA9FE7 /* HDLocalDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E78C501E067EF300BA9FE7 /* HDLocalDataManager.m */; };
 		69E78C561E06A17900BA9FE7 /* HDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E78C551E06A17900BA9FE7 /* HDRootViewController.m */; };
 		69FD80B11DFE4C07003620BF /* order_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69FD80AA1DFE4C07003620BF /* order_normal@2x.png */; };
@@ -98,6 +100,10 @@
 		69B731BD1E0B79D300E6C001 /* HDTrainInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDTrainInfoModel.m; sourceTree = "<group>"; };
 		69B731D31E0BD36400E6C001 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		69B731D41E0BD36400E6C001 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		69C17A051E11182A00333D52 /* HDHeaderFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDHeaderFile.h; sourceTree = "<group>"; };
+		69C17A061E11182A00333D52 /* HDHeaderFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDHeaderFile.m; sourceTree = "<group>"; };
+		69D908CB1E13588A00B5C0CA /* HDFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDFilterViewController.h; sourceTree = "<group>"; };
+		69D908CC1E13588A00B5C0CA /* HDFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDFilterViewController.m; sourceTree = "<group>"; };
 		69E78C4F1E067EF300BA9FE7 /* HDLocalDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDLocalDataManager.h; sourceTree = "<group>"; };
 		69E78C501E067EF300BA9FE7 /* HDLocalDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDLocalDataManager.m; sourceTree = "<group>"; };
 		69E78C541E06A17900BA9FE7 /* HDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDRootViewController.h; sourceTree = "<group>"; };
@@ -198,6 +204,8 @@
 				69FD80A91DFE4C07003620BF /* Image */,
 				69A7FB541DFA92490006F957 /* main.m */,
 				69A7FB711DFA949C0006F957 /* Basic.pch */,
+				69C17A051E11182A00333D52 /* HDHeaderFile.h */,
+				69C17A061E11182A00333D52 /* HDHeaderFile.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -322,6 +330,8 @@
 				69B731B71E0B79A600E6C001 /* HDTrainInfoCell.h */,
 				69B731B81E0B79A600E6C001 /* HDTrainInfoCell.m */,
 				69B731B91E0B79A600E6C001 /* HDTrainInfoCell.xib */,
+				69D908CB1E13588A00B5C0CA /* HDFilterViewController.h */,
+				69D908CC1E13588A00B5C0CA /* HDFilterViewController.m */,
 				69B731B21E0B776600E6C001 /* HDTicketInfoTableViewController.h */,
 				69B731B31E0B776600E6C001 /* HDTicketInfoTableViewController.m */,
 				69B731B41E0B776600E6C001 /* HDTicketInfoTableViewController.xib */,
@@ -474,6 +484,7 @@
 				69E78C511E067EF300BA9FE7 /* HDLocalDataManager.m in Sources */,
 				69B4310E1E07ADD400E9F4D4 /* Station+CoreDataProperties.m in Sources */,
 				69FD81101DFFF89F003620BF /* StationTableViewController.m in Sources */,
+				69D908CD1E13588A00B5C0CA /* HDFilterViewController.m in Sources */,
 				69A7FB851DFE41420006F957 /* PersonalViewController.m in Sources */,
 				69FD80E71DFED132003620BF /* CustomCell.m in Sources */,
 				69B430E51E06EB9500E9F4D4 /* HDStationFetchedResultsControllerDataSource.m in Sources */,
@@ -488,6 +499,7 @@
 				69A7FB821DFE41350006F957 /* OrderViewController.m in Sources */,
 				69FD81401E00D90C003620BF /* AFURLResponseSerialization.m in Sources */,
 				69B1A5901E0D284B0005B654 /* HDBottomBanner.m in Sources */,
+				69C17A071E11182A00333D52 /* HDHeaderFile.m in Sources */,
 				69FD813F1E00D90C003620BF /* AFURLRequestSerialization.m in Sources */,
 				69B731BE1E0B79D300E6C001 /* HDTrainInfoModel.m in Sources */,
 				69FD813E1E00D90C003620BF /* AFSecurityPolicy.m in Sources */,
@@ -624,7 +636,7 @@
 				INFOPLIST_FILE = HDTicket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HMORE.more;
+				PRODUCT_BUNDLE_IDENTIFIER = haoduo.HDTicket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -639,7 +651,7 @@
 				INFOPLIST_FILE = HDTicket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HMORE.more;
+				PRODUCT_BUNDLE_IDENTIFIER = haoduo.HDTicket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

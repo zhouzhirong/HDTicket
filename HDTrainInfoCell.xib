@@ -86,7 +86,7 @@
                 <outlet property="ze_num" destination="awR-tr-JZm" id="MN8-4l-uOx"/>
                 <outlet property="zy_num" destination="770-la-KUC" id="FnX-OI-XY3"/>
             </connections>
-            <point key="canvasLocation" x="-136" y="-42"/>
+            <point key="canvasLocation" x="-405" y="-74"/>
         </tableViewCell>
     </objects>
 </document>

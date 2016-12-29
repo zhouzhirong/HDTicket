@@ -108,7 +108,7 @@
                 <outlet property="previousButton" destination="5M5-gl-DIL" id="gWq-NF-wA3"/>
                 <outlet property="shootButton" destination="0rw-hB-9Vf" id="ccX-Wd-BdJ"/>
             </connections>
-            <point key="canvasLocation" x="70" y="-417"/>
+            <point key="canvasLocation" x="29" y="-416"/>
         </view>
     </objects>
 </document>

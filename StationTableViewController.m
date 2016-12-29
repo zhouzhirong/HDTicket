@@ -99,7 +99,7 @@
 
 -(void)UI
 {
-    //修改搜索框旁边的cancel颜色和title
+    //修改搜索框旁边的cancel颜色和title-----------这个可以实现
 //    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]] ] setTintColor:RGB(51, 125, 255)];
 //    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]] ] setTitle:@"取消"];
     

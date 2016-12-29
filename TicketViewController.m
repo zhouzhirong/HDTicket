@@ -173,17 +173,13 @@
     Model *model = self.dataSource[index];
     model.detalTitle = [change[@"detail"] componentsSeparatedByString:@"年"][1];
     [self.dataSource replaceObjectAtIndex:index withObject:model];
-    NSString *original = change[@"detail"];
-    NSArray *arr = [original componentsSeparatedByString:@"月"];
-    NSString *yearAndMonth = [arr[0] stringByReplacingOccurrencesOfString:@"年" withString:@"-"];
-    yearAndMonth = yearAndMonth.length==7?yearAndMonth:[yearAndMonth stringByReplacingCharactersInRange:NSMakeRange(0, 5) withString:[NSString stringWithFormat:@"%@0",[yearAndMonth substringToIndex:5]]];
-    NSString *day = [arr[1] substringToIndex:((NSString *)arr[1]).length-1];
-    day = day.length==1?[NSString stringWithFormat:@"0%@",day]:day;
-    
-    _ticketDelegate.dateString = [NSMutableString stringWithFormat:@"%@-%@",yearAndMonth,day];
+    //这里是 "2016-12-30" 格式
+    _ticketDelegate.dateString =  transfer(change[@"detail"]);
     
     [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+
 
 
 @end

@@ -180,6 +180,7 @@
         NSArray *fullDatas = [self stationList];
         for (Station *station in fullDatas)
         {
+            //拼音 搜索比对--------暂未实现
             if ([station.name containsString:searchText] || [station.combineLetter containsString:[searchText uppercaseString]])
             {
                 [_searchList addObject:station];

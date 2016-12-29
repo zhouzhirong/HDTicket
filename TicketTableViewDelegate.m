@@ -20,9 +20,10 @@
 
 @interface TicketTableViewDelegate()
 
-@property (nonatomic,strong)NetworkHandle *netHandle;
+
 @property (nonatomic,strong) NSArray * source;
 @property (nonatomic,strong)TicketViewController *viewController;
+
 @end
 @implementation TicketTableViewDelegate
 
@@ -110,21 +111,24 @@
         
     }
     else if (indexPath.section==1){
-        //查询操作 并保存最近查询的出发地和目的地
+        //查询操作 并保存（还未实现）最近查询的出发地和目的地
         NSString *departure = ((Model *)self.source[0]).detalTitle;
         NSString *arrival = ((Model *)self.source[1]).detalTitle;
         NSString *date = self.dateString;
         HDTicketInfoTableViewController *ticketInfoVC = [[HDTicketInfoTableViewController alloc]init];
-        ticketInfoVC.dateStringForBannerLabel = ((Model *)self.source[2]).detalTitle;
-        
+        ticketInfoVC.departure = departure;
+        ticketInfoVC.arrival = arrival;
+        ticketInfoVC.dateStringToprocess = transfer(self.dateString);
+//        NSLog(@"ticketInfoVC.dateStringToprocess----%@",ticketInfoVC.dateStringToprocess);
+#pragma mark  采用运行时设置  省略公开属性
         [ticketInfoVC setHidesBottomBarWhenPushed:YES];
         self.viewController.title = @"返回";
         ticketInfoVC.title = [NSString stringWithFormat:@"%@ - %@",departure,arrival];
         [self.viewController.navigationController pushViewController:ticketInfoVC animated:YES];
          NSURL *url = [NSURL URLWithString:LEFTTicket(APPKEY,departure,arrival,date)];
         CONNECTING;
-        [self.netHandle activateWithURL:url headers:nil params:nil method:Get success:^(NSURLSessionDataTask *task, NSDictionary *dic) {
-            DISCONNECTED;
+        HDAppDelegate *delegate = HD_APP_DELEGATE;
+        [delegate.defaultNetHandle activateWithURL:url headers:nil params:nil method:Get success:^(NSURLSessionDataTask *task, NSDictionary *dic) {
             NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
             NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"jsonString--%@", jsonString);
@@ -152,49 +156,34 @@
                         [ticketInfoVC.dataSource addObject:model];
                     }
                 }
-                [ticketInfoVC.tableView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [ticketInfoVC.tableView reloadData];
+                    //加载成功才可点击
+                    [ticketInfoVC setValue:@YES forKeyPath:@"bottomBanner.userInteractionEnabled"];
+                    [MBProgressHUD hideHUDForView:ticketInfoVC.view animated:YES];
+                });
+                
             }else{
-                [ticketInfoVC.view addSubview:ticketInfoVC.errorLabel];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [ticketInfoVC setValue:@YES forKeyPath:@"bottomBanner.userInteractionEnabled"];
+                    [ticketInfoVC.view addSubview:ticketInfoVC.errorLabel];
+                    [MBProgressHUD hideHUDForView:ticketInfoVC.view animated:YES];
+                });
             }
-            //请求太快 导致错位
-            [MBProgressHUD hideHUDForView:[HD_APP_DELEGATE topViewController].view animated:YES];
-            
+            DISCONNECTED;
         } failure:^(NSURLSessionTask *task, NSError *error) {
-            
             NSLog(@"%@",error);
-            [MBProgressHUD hideHUDForView:[HD_APP_DELEGATE topViewController].view animated:YES];
+            [ticketInfoVC setValue:@YES forKeyPath:@"bottomBanner.userInteractionEnabled"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+               [MBProgressHUD hideHUDForView:ticketInfoVC.view animated:YES];
+                [ticketInfoVC.view addSubview:ticketInfoVC.errorLabel];
+            });
         }];
+        DISCONNECTED;
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    });
 }
-
-//先不考虑后台查询
--(NetworkHandle *)netHandle
-{
-    HDAppDelegate *delegate = HD_APP_DELEGATE;
-    return delegate.defaultNetHandle;
-}
-
-#pragma mark 超过当前时间30分钟的才显示
-//param 1  当前日期    param 2 当前时间
-BOOL check(NSString *dateString,NSString *timeString)
-{
-    //得到火车的出发时间字符串
-    NSString *compare = [[dateString stringByAppendingString:[NSString stringWithFormat:@" %@",timeString]] stringByAppendingString:@":00"];
-    NSDateFormatter *format = [[NSDateFormatter alloc]init];
-    [format setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    // 要确定的时间
-    NSDate *date = [format dateFromString:compare];
-    // 此时此刻
-    NSDate *now = [NSDate date];
-    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
-    NSInteger delta = [timeZone secondsFromGMT];
-    NSInteger secondCount = [date timeIntervalSince1970] - [now timeIntervalSince1970];
-    return secondCount > 1800+delta ? YES : NO;
-}
-
-
-
 
 @end

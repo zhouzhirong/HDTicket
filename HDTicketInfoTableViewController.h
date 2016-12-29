@@ -10,10 +10,15 @@
 
 @interface HDTicketInfoTableViewController : UITableViewController
 
+@property (nonatomic,copy)NSString *departure;
+
+@property (nonatomic,copy)NSString *arrival;
+
 @property (nonatomic , strong)NSMutableArray *dataSource;//数据源  典型MVC
 
-@property (nonatomic,copy)NSString *dateStringForBannerLabel; //
+@property (nonatomic,copy)NSString *dateStringToprocess; //
 
 @property (nonatomic , strong)UILabel *errorLabel;
+
 
 @end

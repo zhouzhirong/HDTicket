@@ -53,7 +53,7 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     [_monthLabel setText:[NSString stringWithFormat:@"%.2ld 年 %li 月",(long)[self year:date],(long)[self month:date]]];
     _monthLabel.textAlignment = NSTextAlignmentCenter;
     [_monthLabel setTextColor:[UIColor blackColor]];
-    [_collectionView reloadData]; //主要驱动力
+    [_collectionView reloadData]; //驱动力
 }
 
 #pragma mark - date
@@ -228,7 +228,7 @@ NSString *const HDCalendarCellIdentifier = @"cell";
     NSInteger i = indexPath.row;
     day = i - firstWeekday + 1;
     
-    //这里利用代理处理回调
+#pragma mark //这里利用代理处理回调
    
     UIViewController *calenderVC = (UIViewController *)self.superview.nextResponder;
     [calenderVC.navigationController popViewControllerAnimated:YES];
