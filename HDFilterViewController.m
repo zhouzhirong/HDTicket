@@ -58,9 +58,8 @@
 -(void)refreshOnConditions
 {
     [self dismissViewControllerAnimated:YES completion:^{}];
-    __block NSMutableArray *originalDataSource = [[NSMutableArray alloc]initWithArray:_originalDataSourceFromTicketVC];
-
-    [_originalDataSourceFromTicketVC enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    __block NSMutableArray *originalDataSource = [[NSMutableArray alloc]initWithArray:self.ticketInfoVC.dataSource];
+    [self.ticketInfoVC.dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         HDTrainInfoModel *model = obj;
         NSArray *fromStations = [self.conditionDict valueForKey:@"from"];
         NSArray *toStations = [self.conditionDict valueForKey:@"to"];
@@ -115,7 +114,7 @@
             [originalDataSource removeObject:model];
         }
     }];
-    self.ticketInfoVC.dataSource = originalDataSource;
+    self.ticketInfoVC.filteredSource = originalDataSource;
     [self.ticketInfoVC.tableView reloadData];
 }
 
@@ -127,7 +126,6 @@
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
     return 4;
 }
 
@@ -326,6 +324,7 @@
 {
     return 30;
 }
+
 
 
 @end

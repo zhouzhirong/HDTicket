@@ -14,7 +14,8 @@
 
 @property (nonatomic,copy)NSString *arrival;
 
-@property (nonatomic , strong)NSMutableArray *dataSource;//数据源  典型MVC
+@property (nonatomic, strong)NSMutableArray *filteredSource;
+@property (nonatomic , strong)NSMutableArray *dataSource;
 
 @property (nonatomic,copy)NSString *dateStringToprocess; //
 

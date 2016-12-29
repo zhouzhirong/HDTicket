@@ -92,8 +92,7 @@
     filterVC.departureStations = stationsToGetOn;
     filterVC.arrivalStations = stationsToGetOff;
     filterVC.ticketInfoVC = self.ticketInfoVC;
-    filterVC.originalDataSourceFromTicketVC = self.ticketInfoVC.dataSource;
-    [self.ticketInfoVC.navigationController presentViewController:filterVC animated:YES completion:^{}];
+    [self.ticketInfoVC presentViewController:filterVC animated:YES completion:^{}];
 }
 
 //时间改为前一天 并显示
@@ -119,7 +118,6 @@
             NSArray *arr = dic[@"result"];
             //先清除原来的旧数据
             [_ticketInfoVC.dataSource removeAllObjects];
-            
             for (NSDictionary *dict in arr) {
                 //比对一下时间30分钟后发车的才显示出来
                 if (check(self.dateString, dict[@"start_time"])) {
@@ -143,12 +141,10 @@
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 [_ticketInfoVC.tableView reloadData];
                 [_ticketInfoVC setValue:@YES forKeyPath:@"bottomBanner.userInteractionEnabled"];
                 [MBProgressHUD hideHUDForView:_ticketInfoVC.view animated:YES];
             });
-            
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_ticketInfoVC.view addSubview:_ticketInfoVC.errorLabel];
@@ -156,17 +152,14 @@
                 [MBProgressHUD hideHUDForView:_ticketInfoVC.view animated:YES];
             });
         }
-        
     } failure:^(NSURLSessionTask *task, NSError *error) {
         NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [_ticketInfoVC setValue:@YES forKeyPath:@"bottomBanner.userInteractionEnabled"];
             [MBProgressHUD hideHUDForView:_ticketInfoVC.view animated:YES];
         });
-        
     }];
 }
-
 
 - (IBAction)nextDay:(UIButton *)sender
 {
@@ -221,7 +214,6 @@
                 [ticketInfoVC setValue:@YES forKeyPath:@"bottomBanner.userInteractionEnabled"];
                 [MBProgressHUD hideHUDForView:ticketInfoVC.view animated:YES];
             });
-            
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 DISCONNECTED;

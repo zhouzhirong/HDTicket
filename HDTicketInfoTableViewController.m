@@ -11,6 +11,8 @@
 #import "HDTrainInfoCell.h"
 #import "HDTrainInfoModel.h"
 #import "HDBottomBanner.h"
+#import "MJRefresh.h"
+
 @interface HDTicketInfoTableViewController ()
 
 @property (nonatomic , strong)UIView *footer;
@@ -29,6 +31,7 @@
         //显示对话框
         [self.view addSubview:HUD];
         [HUD show:YES];
+        _filteredSource = [[NSMutableArray alloc]init];
         _dataSource = [[NSMutableArray alloc]init];
         [self.tableView registerNib:[UINib nibWithNibName:@"HDTrainInfoCell" bundle:nil] forCellReuseIdentifier:@"HDTrainInfoCell"];
     }
@@ -53,6 +56,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [_filteredSource removeAllObjects];
     [_bottomBanner setFrame:CGRectMake(0, HEIGHT, WIDTH, 42)];
 }
 
@@ -61,9 +65,14 @@
     
     UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithImage:[IMAGE(@"share") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(shareToWechat)];
      self.navigationItem.rightBarButtonItem = share;
+    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(HDrefresh)];
 }
 
-
+//
+-(void)HDrefresh
+{
+    NSLog(@"");
+}
 //微信分享
 -(void)shareToWechat
 {
@@ -112,6 +121,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.filteredSource.count>0) {
+        return _filteredSource.count;
+    }
     return _dataSource.count;
 }
 
@@ -119,7 +131,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     HDTrainInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HDTrainInfoCell"];
-    HDTrainInfoModel *model = self.dataSource[indexPath.row];
+    HDTrainInfoModel *model = _filteredSource.count>0 ? _filteredSource[indexPath.row] : self.dataSource[indexPath.row];
     cell.trainInfoModel = model;
     return cell;
 }

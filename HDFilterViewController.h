@@ -10,8 +10,6 @@
 #import "HDTicketInfoTableViewController.h"
 @interface HDFilterViewController : UIViewController
 
-@property (nonatomic, strong)NSArray *originalDataSourceFromTicketVC;
-
 @property (nonatomic,strong)NSArray *departureStations;
 
 @property (nonatomic,strong)NSArray *arrivalStations;

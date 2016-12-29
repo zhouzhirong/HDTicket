@@ -119,8 +119,7 @@
         ticketInfoVC.departure = departure;
         ticketInfoVC.arrival = arrival;
         ticketInfoVC.dateStringToprocess = transfer(self.dateString);
-//        NSLog(@"ticketInfoVC.dateStringToprocess----%@",ticketInfoVC.dateStringToprocess);
-#pragma mark  采用运行时设置  省略公开属性
+
         [ticketInfoVC setHidesBottomBarWhenPushed:YES];
         self.viewController.title = @"返回";
         ticketInfoVC.title = [NSString stringWithFormat:@"%@ - %@",departure,arrival];
